@@ -1,13 +1,16 @@
 {
   "name": "p8-project",
   "private": true,
+  "homepage": "https://your-github-username.github.io/p8",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d docs"
   },
   "dependencies": {
     "bootstrap": "^5.3.7",
@@ -15,8 +18,10 @@
     "js-cookie": "^3.0.5",
     "react": "^19.1.0",
     "react-bootstrap": "^2.10.10",
+    "react-bootstrap-icons": "^1.11.6",
     "react-dom": "^19.1.0",
     "react-router": "^7.7.0",
+    "react-router-bootstrap": "^0.26.3",
     "react-router-dom": "^7.7.0"
   },
   "devDependencies": {
