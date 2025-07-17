@@ -80,9 +80,9 @@ function HomePage() {
   }, [fetchWeather]);
 
   return (
-    <>
+    <div className="page-container">
       <Header />
-      <Container>
+      <Container fluid className="main-content">
         <TabNav />
         <Routes>
           <Route path="/" element={<Overview />} />
@@ -92,7 +92,7 @@ function HomePage() {
         </Routes>
       </Container>
       <Footer />
-    </>
+    </div>
   );
 }
 
