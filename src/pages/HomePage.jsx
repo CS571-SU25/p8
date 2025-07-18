@@ -30,16 +30,9 @@ import OOTDCard from '../components/OOTDCard';
 import viteLogo from '/vite.svg'
 
 const OOTD = () => {
-  const mockOutfit = {
-    image: viteLogo,
-    title: 'Sunny Day Outfit',
-    description: 'A light and breezy outfit perfect for a sunny day.',
-    tags: ['Summer', 'Casual', 'Sunny'],
-  };
-
   return (
     <div>
-      <OOTDCard outfit={mockOutfit} onRefresh={() => {}} onOpenPreferences={() => {}} />
+      <OOTDCard />
     </div>
   );
 };

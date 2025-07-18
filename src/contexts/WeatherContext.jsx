@@ -59,8 +59,13 @@ export const WeatherProvider = ({ children }) => {
 
       setForecast(
         data.daily.time.slice(1, 6).map((time, index) => ({
-          day: new Date(time).toLocaleDateString('en-US', { weekday: 'short' }),
-          temp: Math.round((data.daily.temperature_2m_max[index + 1] + data.daily.temperature_2m_min[index + 1]) / 2),
+          date: time,
+          day: {
+            maxtemp_c: Math.round(data.daily.temperature_2m_max[index + 1]),
+            mintemp_c: Math.round(data.daily.temperature_2m_min[index + 1]),
+            daily_chance_of_rain: 10, // Placeholder
+            condition: { text: getWeatherDescription(data.daily.weather_code[index + 1]) },
+          },
         }))
       );
     } catch (err) {

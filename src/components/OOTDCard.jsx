@@ -1,41 +1,98 @@
-import React from 'react';
-import { Card, Button, Badge, Row, Col } from 'react-bootstrap';
-import { Heart, InfoCircle } from 'react-bootstrap-icons';
+import React, { useContext, useState } from 'react';
+import { Card, Form } from 'react-bootstrap';
+import { WeatherContext } from '../contexts/WeatherContext';
 
-function OOTDCard({ outfit, onRefresh, onOpenPreferences }) {
+const suggestionEngine = {
+  weather: {
+    rain: 'Waterproof jacket, umbrella, and non-slip shoes are essential. ',
+    hot: 'T-shirt and shorts are great. Stay hydrated! ',
+    warm: 'A light jacket or long-sleeve shirt will be comfortable. ',
+    cool: 'A sweater or a medium jacket is a good idea. ',
+    cold: 'Wear a heavy coat, scarf, and gloves. ',
+  },
+  gender: {
+    female: {
+      hot: 'A summer dress or a skirt would be lovely. ',
+      warm: 'A stylish cardigan can complete your look. ',
+      cool: 'A chic trench coat is perfect for this weather. ',
+      cold: 'A fashionable wool coat and a warm scarf. ',
+    },
+    male: {
+      hot: 'Linen pants or shorts will keep you cool. ',
+      warm: 'A bomber jacket is a versatile choice. ',
+      cool: 'A classic denim jacket never goes out of style. ',
+      cold: 'A warm beanie and a parka will keep you toasty. ',
+    },
+  },
+  purpose: {
+    business: 'For a professional look, pair with dress pants/skirt and a formal shirt. ',
+    sport: 'Opt for moisture-wicking athletic wear and comfortable sneakers. ',
+    casual: 'Jeans or casual trousers with a comfortable top are perfect. ',
+  },
+};
+
+const getOutfitSuggestion = (temp, condition, gender, purpose) => {
+  let weatherKey;
+  if (condition.toLowerCase().includes('rain')) weatherKey = 'rain';
+  else if (temp > 25) weatherKey = 'hot';
+  else if (temp > 18) weatherKey = 'warm';
+  else if (temp > 10) weatherKey = 'cool';
+  else weatherKey = 'cold';
+
+  let suggestion = suggestionEngine.weather[weatherKey];
+  suggestion += suggestionEngine.gender[gender][weatherKey] || '';
+  suggestion += suggestionEngine.purpose[purpose];
+
+  return suggestion;
+};
+
+function OOTDCard() {
+  const { current, locationName, loading } = useContext(WeatherContext);
+  const [gender, setGender] = useState('male');
+  const [purpose, setPurpose] = useState('casual');
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!current || !locationName) {
+    return <div>No weather data available.</div>;
+  }
+
+  const temp = current.temp;
+  const condition = current.description;
+  const suggestion = getOutfitSuggestion(temp, condition, gender, purpose);
+
   return (
     <Card>
       <Card.Body>
-        <div className="d-flex justify-content-between align-items-center mb-3">
-          <h5>Outfit Recommendations</h5>
-          <div>
-            <Button variant="primary" size="sm" className="me-2" onClick={onOpenPreferences}>Preferences</Button>
-            <Button variant="secondary" size="sm" onClick={onRefresh}>Refresh</Button>
+        <h5 className="mb-3">Outfit of the Day</h5>
+        <div className="p-3 bg-light rounded">
+          <div className="mb-2">
+            <strong>Weather in {locationName}:</strong>
+            <div>Temperature: {temp}°C • Condition: {condition}</div>
           </div>
-        </div>
-        <Row>
-          <Col md={4}>
-            <Card.Img src={outfit.image} />
-            <div className="d-flex justify-content-end mt-2">
-              <Heart className="me-2" />
-              <InfoCircle />
-            </div>
-          </Col>
-          <Col md={8}>
-            <Card.Title>{outfit.title}</Card.Title>
-            <Card.Text>{outfit.description}</Card.Text>
-            <div>
-              {outfit.tags.map((tag, index) => (
-                <Badge pill bg="light" text="dark" key={index} className="me-1">
-                  {tag}
-                </Badge>
-              ))}
-            </div>
-          </Col>
-        </Row>
-        <div className="mt-3 p-3 bg-light rounded">
-          <strong>Perfect for rainy weather in New York</strong>
-          <div>Temperature: 18°C • Humidity: 7% • Wind: 9 km/h</div>
+          <Form className="my-3">
+            <Form.Group>
+              <Form.Label><strong>Gender:</strong></Form.Label>
+              <div>
+                <Form.Check inline type="radio" label="Male" name="gender" value="male" checked={gender === 'male'} onChange={(e) => setGender(e.target.value)} />
+                <Form.Check inline type="radio" label="Female" name="gender" value="female" checked={gender === 'female'} onChange={(e) => setGender(e.target.value)} />
+              </div>
+            </Form.Group>
+            <Form.Group className="mt-2">
+              <Form.Label><strong>Purpose of Outing:</strong></Form.Label>
+              <div>
+                <Form.Check inline type="radio" label="Casual" name="purpose" value="casual" checked={purpose === 'casual'} onChange={(e) => setPurpose(e.target.value)} />
+                <Form.Check inline type="radio" label="Business" name="purpose" value="business" checked={purpose === 'business'} onChange={(e) => setPurpose(e.target.value)} />
+                <Form.Check inline type="radio" label="Sport" name="purpose" value="sport" checked={purpose === 'sport'} onChange={(e) => setPurpose(e.target.value)} />
+              </div>
+            </Form.Group>
+          </Form>
+          <div className="mt-2">
+            <strong>Outfit Suggestion:</strong>
+            <div>{suggestion}</div>
+          </div>
         </div>
       </Card.Body>
     </Card>
