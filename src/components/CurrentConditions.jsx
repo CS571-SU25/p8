@@ -1,13 +1,17 @@
 import React, { useContext } from 'react';
-import { Card, Row, Col } from 'react-bootstrap';
+import { Card, Row, Col, Button } from 'react-bootstrap';
 import { WeatherContext } from '../contexts/WeatherContext';
 import { SettingsContext } from '../contexts/SettingsContext';
+import { FavoritesContext } from '../contexts/FavoritesContext';
 import DetailTile from './DetailTile';
-import { Droplet, Wind, Eye, Speedometer, Sunrise, Sunset } from 'react-bootstrap-icons';
+import { Droplet, Wind, Speedometer, Sunrise, Sunset, Star, StarFill } from 'react-bootstrap-icons';
 
 function CurrentConditions() {
-  const { current, locationName } = useContext(WeatherContext);
+  const { current, location, locationName } = useContext(WeatherContext);
   const { theme } = useContext(SettingsContext);
+  const { favorites, toggleFavorite } = useContext(FavoritesContext);
+
+  const isFavorite = location && favorites.some(fav => fav.id === location.id);
 
   const getWeatherBackground = () => {
     if (!current || !current.description) return 'rgba(0, 0, 0, 0.3)';
@@ -37,7 +41,17 @@ function CurrentConditions() {
       <Card.Body>
         <Row>
           <Col md={6}>
-            <h2>{locationName || 'New York'}</h2>
+            <div className="d-flex align-items-center">
+              <h2>{locationName || 'New York'}</h2>
+              <Button 
+                variant="link" 
+                onClick={() => location && toggleFavorite(location)} 
+                className="ms-2 p-0 text-white"
+                disabled={!location}
+              >
+                {isFavorite ? <StarFill size={24} /> : <Star size={24} />}
+              </Button>
+            </div>
             <div className="d-flex align-items-center">
               <i className="bi bi-cloud-rain fs-1"></i>
               <div className="ms-3">

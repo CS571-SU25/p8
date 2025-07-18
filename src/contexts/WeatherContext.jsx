@@ -10,7 +10,7 @@ export const WeatherProvider = ({ children }) => {
   const [forecast, setForecast] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [locationName, setLocationName] = useState('');
+  const [location, setLocation] = useState(null); // Changed from locationName
   const { units } = useContext(SettingsContext);
 
   const fetchGeocoding = async (location) => {
@@ -36,12 +36,13 @@ export const WeatherProvider = ({ children }) => {
     return response.json();
   };
 
-  const fetchWeather = useCallback(async (location) => {
+  const fetchWeather = useCallback(async (locationQuery) => { // Renamed location to locationQuery
     setLoading(true);
     setError(null);
     try {
-      const { latitude, longitude, name } = await fetchGeocoding(location);
-      setLocationName(name);
+      const geocodedData = await fetchGeocoding(locationQuery); // Use locationQuery
+      setLocation(geocodedData); // Set the full location object
+      const { latitude, longitude } = geocodedData;
       const data = await fetchWeatherData(latitude, longitude);
 
       setCurrent({
@@ -76,7 +77,7 @@ export const WeatherProvider = ({ children }) => {
   }, [units]);
 
   return (
-    <WeatherContext.Provider value={{ current, forecast, loading, error, fetchWeather, locationName }}>
+    <WeatherContext.Provider value={{ current, forecast, loading, error, fetchWeather, location, locationName: location?.name || '' }}>
       {children}
     </WeatherContext.Provider>
   );

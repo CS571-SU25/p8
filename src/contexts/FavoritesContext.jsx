@@ -14,8 +14,9 @@ export const FavoritesProvider = ({ children }) => {
   }, []);
 
   const toggleFavorite = (location) => {
-    const newFavorites = favorites.includes(location)
-      ? favorites.filter((fav) => fav !== location)
+    const isFavorited = favorites.some(fav => fav.id === location.id);
+    const newFavorites = isFavorited
+      ? favorites.filter((fav) => fav.id !== location.id)
       : [...favorites, location];
     setFavorites(newFavorites);
     Cookies.set('favorites', JSON.stringify(newFavorites), { expires: 365 });
