@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { Card, Form } from 'react-bootstrap';
 import { WeatherContext } from '../contexts/WeatherContext';
+import { SettingsContext } from '../contexts/SettingsContext';
 
 const suggestionEngine = {
   weather: {
@@ -48,6 +49,7 @@ const getOutfitSuggestion = (temp, condition, gender, purpose) => {
 
 function OOTDCard() {
   const { current, locationName, loading } = useContext(WeatherContext);
+  const { theme } = useContext(SettingsContext);
   const [gender, setGender] = useState('male');
   const [purpose, setPurpose] = useState('casual');
 
@@ -63,11 +65,14 @@ function OOTDCard() {
   const condition = current.description;
   const suggestion = getOutfitSuggestion(temp, condition, gender, purpose);
 
+  const cardClass = theme === 'dark' ? 'bg-dark text-light' : 'bg-light text-dark';
+  const bgClass = theme === 'dark' ? 'bg-secondary' : 'bg-light';
+
   return (
-    <Card>
+    <Card className={theme === 'dark' ? 'bg-dark text-light border-secondary' : ''}>
       <Card.Body>
         <h5 className="mb-3">Outfit of the Day</h5>
-        <div className="p-3 bg-light rounded">
+        <div className={`p-3 ${bgClass} rounded`}>
           <div className="mb-2">
             <strong>Weather in {locationName}:</strong>
             <div>Temperature: {temp}°C • Condition: {condition}</div>
