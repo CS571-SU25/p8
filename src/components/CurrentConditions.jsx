@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
-import { Card, Row, Col, Button } from 'react-bootstrap';
+import { Card, Row, Col } from 'react-bootstrap';
 import { WeatherContext } from '../contexts/WeatherContext';
 import { SettingsContext } from '../contexts/SettingsContext';
 import { FavoritesContext } from '../contexts/FavoritesContext';
 import DetailTile from './DetailTile';
-import { Droplet, Wind, Speedometer, Sunrise, Sunset, Star, StarFill } from 'react-bootstrap-icons';
+import { Droplet, Wind, Speedometer, Sunrise, Sunset } from 'react-bootstrap-icons';
+import FavoriteToggle from './FavoriteToggle';
 
 function CurrentConditions() {
   const { current, location, locationName } = useContext(WeatherContext);
@@ -12,6 +13,7 @@ function CurrentConditions() {
   const { favorites, toggleFavorite } = useContext(FavoritesContext);
 
   const isFavorite = location && favorites.some(fav => fav.id === location.id);
+  const displayName = locationName || 'New York';
 
   const getWeatherBackground = () => {
     if (!current || !current.description) return 'rgba(0, 0, 0, 0.3)';
@@ -41,16 +43,15 @@ function CurrentConditions() {
       <Card.Body>
         <Row>
           <Col md={6}>
-            <div className="d-flex align-items-center">
-              <h2>{locationName || 'New York'}</h2>
-              <Button 
-                variant="link" 
-                onClick={() => location && toggleFavorite(location)} 
-                className="ms-2 p-0 text-white"
-                disabled={!location}
-              >
-                {isFavorite ? <StarFill size={24} /> : <Star size={24} />}
-              </Button>
+            <div className="d-flex align-items-center mb-2">
+              <h2 className="me-2">{displayName}</h2>
+              {location && (
+                <FavoriteToggle
+                  isFavorite={isFavorite}
+                  onToggle={() => toggleFavorite(location)}
+                  locationName={displayName}
+                />
+              )}
             </div>
             <div className="d-flex align-items-center">
               <i className="bi bi-cloud-rain fs-1"></i>
@@ -68,14 +69,23 @@ function CurrentConditions() {
         </Row>
         <hr />
         <Row className="text-center">
-          <Col><DetailTile icon={<Droplet />} label="Humidity" value={`${current.humidity}%`} /></Col>
-          <Col><DetailTile icon={<Wind />} label="Wind" value={`${current.wind} km/h`} /></Col>
-
-          <Col><DetailTile icon={<Speedometer />} label="Pressure" value={`${current.pressure} hPa`} /></Col>
+          <Col>
+            <DetailTile icon={<Droplet />} label="Humidity" value={`${current.humidity}%`} />
+          </Col>
+          <Col>
+            <DetailTile icon={<Wind />} label="Wind" value={`${current.wind} km/h`} />
+          </Col>
+          <Col>
+            <DetailTile icon={<Speedometer />} label="Pressure" value={`${current.pressure} hPa`} />
+          </Col>
         </Row>
         <div className="d-flex justify-content-between mt-3">
-            <span><Sunrise /> {current.sunrise}</span>
-            <span><Sunset /> {current.sunset}</span>
+          <span>
+            <Sunrise /> {current.sunrise}
+          </span>
+          <span>
+            <Sunset /> {current.sunset}
+          </span>
         </div>
       </Card.Body>
     </Card>
