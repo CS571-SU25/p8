@@ -33,8 +33,8 @@ function FavoriteToggle({ isFavorite, onToggle, locationName }) {
       </OverlayTrigger>
       <small className="text-muted mt-1">
         {isFavorite
-          ? 'Saved to favorites'
-          : 'Click the star to save this location for quick access'}
+          ? ''
+          : ''}
       </small>
     </div>
   );

@@ -1,7 +1,7 @@
 {
   "name": "p8-project",
   "private": true,
-  "homepage": "https://your-github-username.github.io/p8",
+  "homepage": "https://cs571-su25.github.io/p8",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
@@ -10,7 +10,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d docs"
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "bootstrap": "^5.3.7",
