@@ -54,49 +54,99 @@ function OOTDCard() {
   const [purpose, setPurpose] = useState('casual');
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div>Loading outfit recommendations...</div>;
   }
 
   if (!current || !locationName) {
-    return <div>No weather data available.</div>;
+    return <div>No weather data available for outfit recommendations.</div>;
   }
 
   const temp = current.temp;
   const condition = current.description;
   const suggestion = getOutfitSuggestion(temp, condition, gender, purpose);
 
-  const cardClass = theme === 'dark' ? 'bg-dark text-light' : 'bg-light text-dark';
+  const cardClass = theme === 'dark' ? 'bg-dark text-light border-secondary' : '';
   const bgClass = theme === 'dark' ? 'bg-secondary' : 'bg-light';
 
   return (
-    <Card className={theme === 'dark' ? 'bg-dark text-light border-secondary' : ''}>
+    <Card className={cardClass}>
       <Card.Body>
-        <h5 className="mb-3">Outfit of the Day</h5>
+        <h2 className="h5 mb-3">Outfit of the Day</h2>
         <div className={`p-3 ${bgClass} rounded`}>
           <div className="mb-2">
             <strong>Weather in {locationName}:</strong>
             <div>Temperature: {temp}°C • Condition: {condition}</div>
           </div>
           <Form className="my-3">
-            <Form.Group>
-              <Form.Label><strong>Gender:</strong></Form.Label>
-              <div>
-                <Form.Check inline type="radio" label="Male" name="gender" value="male" checked={gender === 'male'} onChange={(e) => setGender(e.target.value)} />
-                <Form.Check inline type="radio" label="Female" name="gender" value="female" checked={gender === 'female'} onChange={(e) => setGender(e.target.value)} />
-              </div>
-            </Form.Group>
-            <Form.Group className="mt-2">
-              <Form.Label><strong>Purpose of Outing:</strong></Form.Label>
-              <div>
-                <Form.Check inline type="radio" label="Casual" name="purpose" value="casual" checked={purpose === 'casual'} onChange={(e) => setPurpose(e.target.value)} />
-                <Form.Check inline type="radio" label="Business" name="purpose" value="business" checked={purpose === 'business'} onChange={(e) => setPurpose(e.target.value)} />
-                <Form.Check inline type="radio" label="Sport" name="purpose" value="sport" checked={purpose === 'sport'} onChange={(e) => setPurpose(e.target.value)} />
-              </div>
-            </Form.Group>
+            <fieldset>
+              <legend className="h6 mb-2">Personal Preferences</legend>
+              <Form.Group>
+                <Form.Label htmlFor="gender-select"><strong>Gender:</strong></Form.Label>
+                <div role="group" aria-labelledby="gender-select">
+                  <Form.Check 
+                    inline 
+                    type="radio" 
+                    id="gender-male"
+                    name="gender" 
+                    value="male" 
+                    checked={gender === 'male'} 
+                    onChange={(e) => setGender(e.target.value)}
+                    label="Male"
+                  />
+                  <Form.Check 
+                    inline 
+                    type="radio" 
+                    id="gender-female"
+                    name="gender" 
+                    value="female" 
+                    checked={gender === 'female'} 
+                    onChange={(e) => setGender(e.target.value)}
+                    label="Female"
+                  />
+                </div>
+              </Form.Group>
+              <Form.Group className="mt-2">
+                <Form.Label htmlFor="purpose-select"><strong>Purpose of Outing:</strong></Form.Label>
+                <div role="group" aria-labelledby="purpose-select">
+                  <Form.Check 
+                    inline 
+                    type="radio" 
+                    id="purpose-casual"
+                    name="purpose" 
+                    value="casual" 
+                    checked={purpose === 'casual'} 
+                    onChange={(e) => setPurpose(e.target.value)}
+                    label="Casual"
+                  />
+                  <Form.Check 
+                    inline 
+                    type="radio" 
+                    id="purpose-business"
+                    name="purpose" 
+                    value="business" 
+                    checked={purpose === 'business'} 
+                    onChange={(e) => setPurpose(e.target.value)}
+                    label="Business"
+                  />
+                  <Form.Check 
+                    inline 
+                    type="radio" 
+                    id="purpose-sport"
+                    name="purpose" 
+                    value="sport" 
+                    checked={purpose === 'sport'} 
+                    onChange={(e) => setPurpose(e.target.value)}
+                    label="Sport"
+                  />
+                </div>
+              </Form.Group>
+            </fieldset>
           </Form>
           <div className="mt-2">
             <strong>Outfit Suggestion:</strong>
-            <div>{suggestion}</div>
+            <div role="region" aria-label="Personalized outfit recommendation">
+              {suggestion}
+            </div>
           </div>
         </div>
       </Card.Body>

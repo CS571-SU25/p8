@@ -1,72 +1,13 @@
-import React from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
-import { Container } from 'react-bootstrap';
+import React, { useContext, useEffect } from 'react';
+import { Container, Row, Col, Card, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
-import TabNav from '../components/TabNav';
 import Footer from '../components/Footer';
-
-import CurrentConditions from '../components/CurrentConditions';
-import ForecastCarousel from '../components/ForecastCarousel';
-import { useContext } from 'react';
+import ErrorAlert from '../components/ErrorAlert';
 import { WeatherContext } from '../contexts/WeatherContext';
 
-// Placeholder components for each tab
-const Overview = () => {
-  const { current } = useContext(WeatherContext);
-
-  if (!current) {
-    return <div>Loading...</div>;
-  }
-
-  return (
-  <div>
-    <CurrentConditions />
-    <ForecastCarousel />
-  </div>
-  );
-};
-import OOTDCard from '../components/OOTDCard';
-
-import viteLogo from '/vite.svg'
-
-const OOTD = () => {
-  return (
-    <div>
-      <OOTDCard />
-    </div>
-  );
-};
-import AlertList from '../components/AlertList';
-import AlertFormModal from '../components/AlertFormModal';
-import { Button } from 'react-bootstrap';
-import { useState } from 'react';
-
-const Alerts = () => {
-  const [showModal, setShowModal] = useState(false);
-
-  const handleShowModal = () => setShowModal(true);
-  const handleCloseModal = () => setShowModal(false);
-
-  return (
-    <div>
-      <div className="d-flex justify-content-end mb-3">
-        <Button variant="primary" onClick={handleShowModal}>Add Alert</Button>
-      </div>
-      <AlertList />
-      <AlertFormModal show={showModal} handleClose={handleCloseModal} />
-    </div>
-  );
-};
-import SunTimesCard from '../components/SunTimesCard';
-
-const SunTimes = () => {
-  return <SunTimesCard />;
-};
-
-import { useEffect } from 'react';
-
 function HomePage() {
-  const { fetchWeather } = useContext(WeatherContext);
+  const { fetchWeather, current, locationName } = useContext(WeatherContext);
 
   useEffect(() => {
     fetchWeather('New York'); // Default location
@@ -76,13 +17,84 @@ function HomePage() {
     <div className="page-container">
       <Header />
       <Container fluid className="main-content">
-        <TabNav />
-        <Routes>
-          <Route path="/" element={<Overview />} />
-          <Route path="/ootd" element={<OOTD />} />
-          <Route path="/alerts" element={<Alerts />} />
-          <Route path="/suntimes" element={<SunTimes />} />
-        </Routes>
+        <ErrorAlert />
+        <div className="text-center mb-5">
+          <h1 className="display-4 mb-3">Welcome to WeatherStyle</h1>
+          <p className="lead">Your reliable source for weather forecasts and information</p>
+          {current && (
+            <div className="alert alert-info">
+              <strong>Current Weather in {locationName}:</strong> {current.temp}°C, {current.description}
+            </div>
+          )}
+        </div>
+
+        <Row className="g-4">
+          <Col lg={4} md={6}>
+            <Card className="h-100">
+              <Card.Body className="text-center">
+                <h3 className="card-title">Weather Overview</h3>
+                <p className="card-text">Get detailed current weather conditions and 5-day forecasts for any location.</p>
+                <Link to="/overview">
+                  <Button variant="primary">View Overview</Button>
+                </Link>
+              </Card.Body>
+            </Card>
+          </Col>
+
+          <Col lg={4} md={6}>
+            <Card className="h-100">
+              <Card.Body className="text-center">
+                <h3 className="card-title">Outfit of the Day</h3>
+                <p className="card-text">Get personalized outfit recommendations based on current weather conditions.</p>
+                <Link to="/ootd">
+                  <Button variant="primary">Get Recommendations</Button>
+                </Link>
+              </Card.Body>
+            </Card>
+          </Col>
+
+          <Col lg={4} md={6}>
+            <Card className="h-100">
+              <Card.Body className="text-center">
+                <h3 className="card-title">Weather Alerts</h3>
+                <p className="card-text">Set up and manage weather alerts to stay informed about severe weather.</p>
+                <Link to="/alerts">
+                  <Button variant="primary">Manage Alerts</Button>
+                </Link>
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+
+        <div className="mt-5 text-center">
+          <h2>Quick Features</h2>
+          <Row className="mt-4">
+            <Col md={3}>
+              <div className="text-center">
+                <h4>Search Cities</h4>
+                <p>Search for any city worldwide to get weather information</p>
+              </div>
+            </Col>
+            <Col md={3}>
+              <div className="text-center">
+                <h4>Favorites</h4>
+                <p>Save your favorite locations for quick access</p>
+              </div>
+            </Col>
+            <Col md={3}>
+              <div className="text-center">
+                <h4>Dark Mode</h4>
+                <p>Switch between light and dark themes</p>
+              </div>
+            </Col>
+            <Col md={3}>
+              <div className="text-center">
+                <h4>Responsive</h4>
+                <p>Works perfectly on all devices</p>
+              </div>
+            </Col>
+          </Row>
+        </div>
       </Container>
       <Footer />
     </div>
