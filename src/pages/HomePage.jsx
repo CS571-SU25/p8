@@ -1,9 +1,11 @@
 import React, { useContext, useEffect } from 'react';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { CloudSun, PersonCheck, Bell, Search, Heart, Moon, Phone } from 'react-bootstrap-icons';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ErrorAlert from '../components/ErrorAlert';
+import WeatherMonitor from '../components/WeatherMonitor';
 import { WeatherContext } from '../contexts/WeatherContext';
 
 function HomePage() {
@@ -16,6 +18,7 @@ function HomePage() {
   return (
     <div className="page-container">
       <Header />
+      <WeatherMonitor />
       <Container fluid className="main-content">
         <ErrorAlert />
         <div className="text-center mb-5">
@@ -30,36 +33,45 @@ function HomePage() {
 
         <Row className="g-4">
           <Col lg={4} md={6}>
-            <Card className="h-100">
-              <Card.Body className="text-center">
-                <h3 className="card-title">Weather Overview</h3>
-                <p className="card-text">Get detailed current weather conditions and 5-day forecasts for any location.</p>
+            <Card className="h-100 shadow-sm border-0 feature-card">
+              <Card.Body className="text-center p-4">
+                <div className="feature-icon mb-3">
+                  <CloudSun size={48} className="text-primary" />
+                </div>
+                <h3 className="card-title h4 mb-3">Weather Overview</h3>
+                <p className="card-text text-muted">Get detailed current weather conditions and 5-day forecasts for any location.</p>
                 <Link to="/overview">
-                  <Button variant="primary">View Overview</Button>
+                  <Button variant="primary" className="rounded-pill px-4">View Overview</Button>
                 </Link>
               </Card.Body>
             </Card>
           </Col>
 
           <Col lg={4} md={6}>
-            <Card className="h-100">
-              <Card.Body className="text-center">
-                <h3 className="card-title">Outfit of the Day</h3>
-                <p className="card-text">Get personalized outfit recommendations based on current weather conditions.</p>
+            <Card className="h-100 shadow-sm border-0 feature-card">
+              <Card.Body className="text-center p-4">
+                <div className="feature-icon mb-3">
+                  <PersonCheck size={48} className="text-success" />
+                </div>
+                <h3 className="card-title h4 mb-3">Outfit of the Day</h3>
+                <p className="card-text text-muted">Get personalized outfit recommendations based on current weather conditions.</p>
                 <Link to="/ootd">
-                  <Button variant="primary">Get Recommendations</Button>
+                  <Button variant="success" className="rounded-pill px-4">Get Recommendations</Button>
                 </Link>
               </Card.Body>
             </Card>
           </Col>
 
           <Col lg={4} md={6}>
-            <Card className="h-100">
-              <Card.Body className="text-center">
-                <h3 className="card-title">Weather Alerts</h3>
-                <p className="card-text">Set up and manage weather alerts to stay informed about severe weather.</p>
+            <Card className="h-100 shadow-sm border-0 feature-card">
+              <Card.Body className="text-center p-4">
+                <div className="feature-icon mb-3">
+                  <Bell size={48} className="text-warning" />
+                </div>
+                <h3 className="card-title h4 mb-3">Weather Alerts</h3>
+                <p className="card-text text-muted">Set up and manage weather alerts to stay informed about severe weather.</p>
                 <Link to="/alerts">
-                  <Button variant="primary">Manage Alerts</Button>
+                  <Button variant="warning" className="rounded-pill px-4">Manage Alerts</Button>
                 </Link>
               </Card.Body>
             </Card>
@@ -67,30 +79,42 @@ function HomePage() {
         </Row>
 
         <div className="mt-5 text-center">
-          <h2>Quick Features</h2>
-          <Row className="mt-4">
-            <Col md={3}>
-              <div className="text-center">
-                <h4>Search Cities</h4>
-                <p>Search for any city worldwide to get weather information</p>
+          <h2 className="mb-4">Quick Features</h2>
+          <Row className="mt-4 g-4">
+            <Col md={3} sm={6}>
+              <div className="text-center quick-feature">
+                <div className="feature-icon-small mb-3">
+                  <Search size={32} className="text-info" />
+                </div>
+                <h5 className="fw-semibold">Search Cities</h5>
+                <p className="text-muted small">Search for any city worldwide to get weather information</p>
               </div>
             </Col>
-            <Col md={3}>
-              <div className="text-center">
-                <h4>Favorites</h4>
-                <p>Save your favorite locations for quick access</p>
+            <Col md={3} sm={6}>
+              <div className="text-center quick-feature">
+                <div className="feature-icon-small mb-3">
+                  <Heart size={32} className="text-danger" />
+                </div>
+                <h5 className="fw-semibold">Favorites</h5>
+                <p className="text-muted small">Save your favorite locations for quick access</p>
               </div>
             </Col>
-            <Col md={3}>
-              <div className="text-center">
-                <h4>Dark Mode</h4>
-                <p>Switch between light and dark themes</p>
+            <Col md={3} sm={6}>
+              <div className="text-center quick-feature">
+                <div className="feature-icon-small mb-3">
+                  <Moon size={32} className="text-secondary" />
+                </div>
+                <h5 className="fw-semibold">Dark Mode</h5>
+                <p className="text-muted small">Switch between light and dark themes</p>
               </div>
             </Col>
-            <Col md={3}>
-              <div className="text-center">
-                <h4>Responsive</h4>
-                <p>Works perfectly on all devices</p>
+            <Col md={3} sm={6}>
+              <div className="text-center quick-feature">
+                <div className="feature-icon-small mb-3">
+                  <Phone size={32} className="text-primary" />
+                </div>
+                <h5 className="fw-semibold">Responsive</h5>
+                <p className="text-muted small">Works perfectly on all devices</p>
               </div>
             </Col>
           </Row>

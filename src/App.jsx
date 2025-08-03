@@ -4,6 +4,7 @@ import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { FavoritesProvider } from './contexts/FavoritesContext';
 import { AlertsProvider } from './contexts/AlertsContext';
 import { ReportsProvider } from './contexts/ReportsContext';
+import { OutfitProvider } from './contexts/OutfitContext';
 import HomePage from './pages/HomePage';
 import OverviewPage from './pages/OverviewPage';
 import OOTDPage from './pages/OOTDPage';
@@ -21,15 +22,17 @@ function App() {
     <FavoritesProvider>
       <AlertsProvider>
         <ReportsProvider>
-          <HashRouter>
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/overview" element={<OverviewPage />} />
-              <Route path="/ootd" element={<OOTDPage />} />
-              <Route path="/alerts" element={<AlertsPage />} />
-              <Route path="*" element={<Navigate to="/" replace />} />
-            </Routes>
-          </HashRouter>
+          <OutfitProvider>
+            <HashRouter>
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/overview" element={<OverviewPage />} />
+                <Route path="/ootd" element={<OOTDPage />} />
+                <Route path="/alerts" element={<AlertsPage />} />
+                <Route path="*" element={<Navigate to="/" replace />} />
+              </Routes>
+            </HashRouter>
+          </OutfitProvider>
         </ReportsProvider>
       </AlertsProvider>
     </FavoritesProvider>

@@ -1,17 +1,20 @@
 import React, { useState, useContext } from 'react';
 import { Container, Navbar, Form, Button, Nav } from 'react-bootstrap';
-import { Star, ArrowClockwise, Gear, Heart } from 'react-bootstrap-icons';
+import { Star, ArrowClockwise, Gear, Heart, PersonFill } from 'react-bootstrap-icons';
 import { Link, useLocation } from 'react-router-dom';
 import FavoritesModal from './FavoritesModal';
 import SettingsModal from './SettingsModal';
+import SavedOutfitsModal from './SavedOutfitsModal';
 import { WeatherContext } from '../contexts/WeatherContext';
 import { SettingsContext } from '../contexts/SettingsContext';
 
 function Header() {
   const [showFavorites, setShowFavorites] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
+  const [showOutfits, setShowOutfits] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
-  const { fetchWeather } = useContext(WeatherContext);
+  const [isRefreshing, setIsRefreshing] = useState(false);
+  const { fetchWeather, locationName } = useContext(WeatherContext);
   const { theme } = useContext(SettingsContext);
   const location = useLocation();
 
@@ -22,10 +25,22 @@ function Header() {
     }
   };
 
-  const handleRefresh = () => {
-    // Refresh current weather data
-    if (searchTerm.trim()) {
-      fetchWeather(searchTerm.trim());
+  const handleRefresh = async () => {
+    setIsRefreshing(true);
+    try {
+      // Refresh current weather data
+      if (locationName) {
+        await fetchWeather(locationName);
+      } else if (searchTerm.trim()) {
+        await fetchWeather(searchTerm.trim());
+      } else {
+        // Default to New York if no location is set
+        await fetchWeather('New York');
+      }
+    } catch (error) {
+      console.error('Failed to refresh weather data:', error);
+    } finally {
+      setIsRefreshing(false);
     }
   };
 
@@ -87,12 +102,22 @@ function Header() {
               </Button>
               <Button 
                 variant="link" 
+                className={`${buttonClass} me-2`} 
+                onClick={() => setShowOutfits(true)}
+                aria-label="View saved outfits"
+                title="View saved outfits and history"
+              >
+                <PersonFill />
+              </Button>
+              <Button 
+                variant="link" 
                 className={`${buttonClass} me-2`}
                 onClick={handleRefresh}
-                aria-label="Refresh weather data"
-                title="Refresh current weather data"
+                disabled={isRefreshing}
+                aria-label={isRefreshing ? "Refreshing weather data..." : "Refresh weather data"}
+                title={isRefreshing ? "Refreshing..." : "Refresh current weather data"}
               >
-                <ArrowClockwise />
+                <ArrowClockwise className={isRefreshing ? "spinning" : ""} />
               </Button>
               <Button 
                 variant="link" 
@@ -113,6 +138,7 @@ function Header() {
 
       <FavoritesModal show={showFavorites} handleClose={() => setShowFavorites(false)} />
       <SettingsModal show={showSettings} handleClose={() => setShowSettings(false)} />
+      <SavedOutfitsModal show={showOutfits} onHide={() => setShowOutfits(false)} />
     </>
   );
 }

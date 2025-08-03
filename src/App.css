@@ -71,6 +71,82 @@ body.dark-theme {
   padding: 1rem;
 }
 
+/* HomePage text readability improvements */
+.page-container .main-content .text-center {
+  background-color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.dark-theme .page-container .main-content .text-center {
+  background-color: rgba(30, 30, 30, 0.9);
+  color: #ecf0f1;
+}
+
+/* HomePage heading styles */
+.page-container .display-4 {
+  color: #2c3e50;
+  font-weight: 700;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dark-theme .page-container .display-4 {
+  color: #ecf0f1;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* HomePage lead text */
+.page-container .lead {
+  color: #34495e;
+  font-weight: 500;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.dark-theme .page-container .lead {
+  color: #bdc3c7;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Quick Features section */
+.page-container .mt-5 {
+  background-color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 2rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.dark-theme .page-container .mt-5 {
+  background-color: rgba(30, 30, 30, 0.9);
+}
+
+/* Quick Features headings */
+.page-container .mt-5 h2,
+.page-container .mt-5 h4 {
+  color: #2c3e50;
+  font-weight: 600;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.dark-theme .page-container .mt-5 h2,
+.dark-theme .page-container .mt-5 h4 {
+  color: #ecf0f1;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Quick Features text */
+.page-container .mt-5 p {
+  color: #34495e;
+  font-weight: 400;
+}
+
+.dark-theme .page-container .mt-5 p {
+  color: #bdc3c7;
+}
+
 .page-container {
   display: flex;
   flex-direction: column;
@@ -79,7 +155,7 @@ body.dark-theme {
   margin: auto;
 }
 
-/* 全局背景图片设置 */
+/* Global background image settings */
 body {
   background-image: url('./assets/MainpageBG.png');
   background-size: cover;
@@ -99,7 +175,7 @@ body {
   min-height: 100vh;
 }
 
-/* 为导航栏添加半透明背景 */
+/* Add semi-transparent background for navigation bar */
 .navbar {
   backdrop-filter: blur(15px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -111,7 +187,7 @@ body {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* 为卡片添加半透明背景，确保内容可读性 */
+/* Add semi-transparent background for cards to ensure content readability */
 .card {
   background-color: rgba(255, 255, 255, 0.95) !important;
   backdrop-filter: blur(15px);
@@ -135,7 +211,7 @@ body {
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
-/* 卡片主体优化 */
+/* Card body optimization */
 .card-body {
   padding: 1.5rem;
   border-radius: 0.375rem;
@@ -146,7 +222,7 @@ body {
   backdrop-filter: blur(10px);
 }
 
-/* 卡片标题优化 */
+/* Card title optimization */
 .card-title {
   font-weight: 600;
   margin-bottom: 1rem;
@@ -157,7 +233,7 @@ body {
   color: #ecf0f1;
 }
 
-/* 卡片文本优化 */
+/* Card text optimization */
 .card-text {
   line-height: 1.6;
   color: #34495e;
@@ -175,7 +251,7 @@ body {
   background-color: rgba(33, 37, 41, 0.9) !important;
 }
 
-/* 为 Footer 添加半透明背景 */
+/* Add semi-transparent background for Footer */
 .footer {
   background-color: rgba(248, 249, 250, 0.9) !important;
 }
@@ -184,7 +260,7 @@ body {
   background-color: rgba(31, 31, 31, 0.9) !important;
 }
 
-/* TabNav 组件样式优化 */
+/* TabNav component style optimization */
 .nav-pills .nav-link {
   border-radius: 15px !important;
   margin: 0 2px;
@@ -203,7 +279,7 @@ body {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
-/* 导航容器样式 */
+/* Navigation container styles */
 .nav-container {
   backdrop-filter: blur(15px);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -213,7 +289,7 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* 屏幕阅读器专用样式 */
+/* Screen reader only styles */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -226,7 +302,7 @@ body {
   border: 0;
 }
 
-/* 焦点样式优化 */
+/* Focus style optimization */
 *:focus {
   outline: 2px solid #007bff;
   outline-offset: 2px;
@@ -238,7 +314,7 @@ body {
   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
-/* 高对比度模式支持 */
+/* High contrast mode support */
 @media (prefers-contrast: high) {
   .card {
     border: 2px solid #000;
@@ -253,7 +329,7 @@ body {
   }
 }
 
-/* 减少动画模式支持 */
+/* Reduced motion mode support */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -272,7 +348,7 @@ body {
   }
 }
 
-/* 颜色对比度优化 */
+/* Color contrast optimization */
 .card-title {
   font-weight: 600;
   margin-bottom: 1rem;
@@ -292,7 +368,7 @@ body {
   color: #e0e0e0;
 }
 
-/* 链接颜色优化 */
+/* Link color optimization */
 a {
   color: #0056b3;
   text-decoration: underline;
@@ -311,7 +387,7 @@ a:hover {
   color: #99ccff;
 }
 
-/* 按钮对比度优化 */
+/* Button contrast optimization */
 .btn-primary {
   background-color: #0056b3;
   border-color: #0056b3;
@@ -334,4 +410,113 @@ a:hover {
   background-color: #99ccff;
   border-color: #99ccff;
   color: #000000;
+}
+
+/* Refresh button rotation animation */
+.spinning {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Reduced motion mode support */
+@media (prefers-reduced-motion: reduce) {
+  .spinning {
+    animation: none;
+  }
+}
+
+/* Simple Footer Styles */
+.footer {
+  background-color: rgba(248, 249, 250, 0.9) !important;
+  border-top: 1px solid #e7e7e7;
+}
+
+.dark-theme .footer {
+  background-color: rgba(31, 31, 31, 0.9) !important;
+  color: #ffffff;
+  border-top: 1px solid #333;
+}
+
+.footer .btn-link {
+  text-decoration: none;
+}
+
+.footer .btn-link:hover {
+  text-decoration: underline;
+}
+
+/* HomePage Feature Cards */
+.feature-card {
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
+}
+
+.dark-theme .feature-card {
+  background: rgba(52, 58, 64, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark-theme .feature-card:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3) !important;
+}
+
+.feature-icon {
+  transition: transform 0.3s ease;
+}
+
+.feature-card:hover .feature-icon {
+  transform: scale(1.1);
+}
+
+/* Quick Features */
+.quick-feature {
+  padding: 1.5rem;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  background: rgba(248, 249, 250, 0.5);
+}
+
+.quick-feature:hover {
+  background: rgba(248, 249, 250, 0.8);
+  transform: translateY(-3px);
+}
+
+.dark-theme .quick-feature {
+  background: rgba(52, 58, 64, 0.3);
+}
+
+.dark-theme .quick-feature:hover {
+  background: rgba(52, 58, 64, 0.6);
+}
+
+.feature-icon-small {
+  transition: transform 0.3s ease;
+}
+
+.quick-feature:hover .feature-icon-small {
+  transform: scale(1.2);
+}
+
+/* Button enhancements */
+.rounded-pill {
+  transition: all 0.3s ease;
+}
+
+.rounded-pill:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }

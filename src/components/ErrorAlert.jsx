@@ -18,12 +18,12 @@ function ErrorAlert() {
 
   const getErrorMessage = (error) => {
     if (error.includes('Location not found')) {
-      return '找不到该城市，请检查城市名称是否正确。';
+      return 'City not found. Please check if the city name is correct.';
     }
     if (error.includes('could not be fetched')) {
-      return '网络连接失败，请检查网络连接后重试。';
+      return 'Network connection failed. Please check your network connection and try again.';
     }
-    return '获取天气信息时出现错误，请稍后重试。';
+    return 'An error occurred while fetching weather information. Please try again later.';
   };
 
   const alertClass = theme === 'dark' ? 'bg-danger text-light' : 'bg-danger text-white';
@@ -33,7 +33,7 @@ function ErrorAlert() {
       <div className="d-flex align-items-center">
         <ExclamationTriangle className="me-2" />
         <div className="flex-grow-1">
-          <Alert.Heading>出错了！</Alert.Heading>
+          <Alert.Heading>Error!</Alert.Heading>
           <p className="mb-2">{getErrorMessage(error)}</p>
           {locationName && (
             <Button 
@@ -43,7 +43,7 @@ function ErrorAlert() {
               className="d-flex align-items-center"
             >
               <ArrowClockwise className="me-1" />
-              重试
+              Retry
             </Button>
           )}
         </div>
@@ -52,4 +52,4 @@ function ErrorAlert() {
   );
 }
 
-export default ErrorAlert; 
+export default ErrorAlert;
