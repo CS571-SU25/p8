@@ -160,10 +160,7 @@ export class AlertMonitor {
     return true;
   }
 
-  // Method to manually test an alert
-  testAlert(alert, weather) {
-    return this.triggerAlert(alert, weather);
-  }
+
 
   // Get status of monitoring
   getStatus() {

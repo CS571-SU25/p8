@@ -1,16 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Container, Button } from 'react-bootstrap';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import AlertList from '../components/AlertList';
 import AlertFormModal from '../components/AlertFormModal';
 import ErrorAlert from '../components/ErrorAlert';
+import { AlertsContext } from '../contexts/AlertsContext';
 
 function AlertsPage() {
   const [showModal, setShowModal] = useState(false);
+  const { addAlert } = useContext(AlertsContext);
 
   const handleShowModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
+
+
 
   return (
     <div className="page-container">

@@ -65,6 +65,8 @@ function AlertList() {
 
 
 
+
+
   if (alerts.length === 0) {
     return (
       <Card className="p-4 shadow-sm">
@@ -136,6 +138,7 @@ function AlertList() {
               </Col>
               <Col xs="auto">
                 <div className="d-flex flex-column gap-1">
+
                   <Button 
                     variant="link" 
                     onClick={() => toggleAlert(alert.id)} 

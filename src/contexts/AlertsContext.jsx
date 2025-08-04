@@ -83,10 +83,7 @@ export function AlertsProvider({ children }) {
     }
   };
 
-  // Method to test an alert notification
-  const testAlert = (alert, weather) => {
-    return alertMonitor.testAlert(alert, weather);
-  };
+
 
   // Method to request notification permission manually
   const requestNotificationPermission = async () => {
@@ -103,7 +100,6 @@ export function AlertsProvider({ children }) {
     updateAlert,
     clearAllAlerts,
     checkAlerts,
-    testAlert,
     notificationPermission,
     requestNotificationPermission
   };
