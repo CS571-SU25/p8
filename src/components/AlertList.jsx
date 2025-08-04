@@ -68,7 +68,7 @@ function AlertList() {
   if (alerts.length === 0) {
     return (
       <Card className="p-4 shadow-sm">
-        <h4 className="mb-4">Weather Alerts</h4>
+        <h4 className="mb-4 weather-alerts-title">Weather Alerts</h4>
         <div className="text-center py-4">
           <p className="text-muted">No alerts set up yet.</p>
           <p className="text-muted small">Click "Add Alert" to create your first weather alert.</p>
@@ -80,7 +80,7 @@ function AlertList() {
   return (
     <Card className="p-4 shadow-sm">
       <div className="d-flex justify-content-between align-items-center mb-4">
-        <h4 className="mb-0">Weather Alerts ({alerts.length})</h4>
+        <h4 className="mb-0 weather-alerts-title">Weather Alerts ({alerts.length})</h4>
         <div>
           {notificationPermission !== 'granted' && (
             <Badge bg="warning" className="me-2">

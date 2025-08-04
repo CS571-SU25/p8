@@ -18,7 +18,7 @@ function AlertsPage() {
       <Container fluid className="main-content">
         <ErrorAlert />
         <div className="d-flex justify-content-between align-items-center mb-4">
-          <h1 className="mb-0">Weather Alerts</h1>
+          <h1 className="mb-0 weather-alerts-title">Weather Alerts</h1>
           <Button variant="primary" onClick={handleShowModal}>
             Add Alert
           </Button>
@@ -35,4 +35,4 @@ function AlertsPage() {
   );
 }
 
-export default AlertsPage; 
+export default AlertsPage;

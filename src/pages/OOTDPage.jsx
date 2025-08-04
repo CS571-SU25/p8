@@ -19,7 +19,7 @@ function OOTDPage() {
       <Header />
       <Container fluid className="main-content">
         <ErrorAlert />
-        <h1 className="mb-4">Outfit of the Day</h1>
+        <h1 className="mb-4 ootd-title">Outfit of the Day</h1>
         <div className="row">
           <div className="col-lg-8 mx-auto">
             <OOTDCard />
@@ -31,4 +31,4 @@ function OOTDPage() {
   );
 }
 
-export default OOTDPage; 
+export default OOTDPage;

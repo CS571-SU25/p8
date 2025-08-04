@@ -15,7 +15,7 @@ function OverviewPage() {
       <Header />
       <Container fluid className="main-content">
         <ErrorAlert />
-        <h1 className="mb-4">Weather Overview</h1>
+        <h1 className="mb-4 weather-overview-title">Weather Overview</h1>
         {!current ? (
           <div className="text-center">
             <p>Loading weather information...</p>
@@ -32,4 +32,4 @@ function OverviewPage() {
   );
 }
 
-export default OverviewPage; 
+export default OverviewPage;

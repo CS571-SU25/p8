@@ -38,7 +38,7 @@ function HomePage() {
                 <div className="feature-icon mb-3">
                   <CloudSun size={48} className="text-primary" />
                 </div>
-                <h3 className="card-title h4 mb-3">Weather Overview</h3>
+                <h3 className="card-title h4 mb-3 weather-overview-title">Weather Overview</h3>
                 <p className="card-text text-muted">Get detailed current weather conditions and 5-day forecasts for any location.</p>
                 <Link to="/overview">
                   <Button variant="primary" className="rounded-pill px-4">View Overview</Button>
@@ -53,7 +53,7 @@ function HomePage() {
                 <div className="feature-icon mb-3">
                   <PersonCheck size={48} className="text-success" />
                 </div>
-                <h3 className="card-title h4 mb-3">Outfit of the Day</h3>
+                <h3 className="card-title h4 mb-3 ootd-title">Outfit of the Day</h3>
                 <p className="card-text text-muted">Get personalized outfit recommendations based on current weather conditions.</p>
                 <Link to="/ootd">
                   <Button variant="success" className="rounded-pill px-4">Get Recommendations</Button>
@@ -68,7 +68,7 @@ function HomePage() {
                 <div className="feature-icon mb-3">
                   <Bell size={48} className="text-warning" />
                 </div>
-                <h3 className="card-title h4 mb-3">Weather Alerts</h3>
+                <h3 className="card-title h4 mb-3 weather-alerts-title">Weather Alerts</h3>
                 <p className="card-text text-muted">Set up and manage weather alerts to stay informed about severe weather.</p>
                 <Link to="/alerts">
                   <Button variant="warning" className="rounded-pill px-4">Manage Alerts</Button>

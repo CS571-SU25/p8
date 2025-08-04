@@ -520,3 +520,32 @@ a:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
+
+/* Weather Overview text always white */
+.weather-overview-title {
+  color: #ffffff !important;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Outfit of the Day text always white */
+.ootd-title {
+  color: #ffffff !important;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Weather Alerts text always white */
+.weather-alerts-title {
+  color: #ffffff !important;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Ensure all special titles are always white in both light and dark themes */
+.weather-overview-title,
+.ootd-title,
+.weather-alerts-title,
+.dark-theme .weather-overview-title,
+.dark-theme .ootd-title,
+.dark-theme .weather-alerts-title {
+  color: #ffffff !important;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
